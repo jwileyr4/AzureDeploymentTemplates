@@ -1,4 +1,14 @@
-# VM-Series in an Availability Set Template
+# VM-Series in an Availability Set Template (@michelvankessel FORK)
+
+-------------------------------------------------------------
+
+- 20170623 - made a fork to change the following things
+1. add two more NICS and attach to VM-series
+2. make choice at least vm choice that support +4 nics (e.g. DS4_v2)
+3. Change to Managed Disks
+4. Change Availability set with managed disk support
+
+------------------------------------------------------------
 
 This ARM template deploys a VM-Series next generation firewall VM in an availability set of a Azure resource group. It lets you select your:
 - Username and Password, or SSH key
