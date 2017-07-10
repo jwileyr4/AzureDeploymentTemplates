@@ -85,7 +85,6 @@
             "type": "string",
             "defaultValue": "latest",
             "allowedValues": [
-                "7.1.1",
 		"8.0.0"		    
             ],
             "metadata": {
