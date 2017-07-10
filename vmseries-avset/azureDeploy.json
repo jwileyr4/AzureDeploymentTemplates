@@ -115,7 +115,7 @@
         },
 	"availabilitySetName": {
             "type": "string",
-	    "defaultValue": "VMSeriesFwAvSet",
+	    "defaultValue": "avsetPAN",
             "metadata": {
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
@@ -169,46 +169,88 @@
         "description": "Subnet for the Trust"
       }
     },
+	"subnet3Name": {
+      "type": "string",
+      "defaultValue": "DMZ",
+      "metadata": {
+        "description": "Subnet for the DMZ"
+      }
+    },
+	"subnet4Name": {
+      "type": "string",
+      "defaultValue": "ExpressRoute",
+      "metadata": {
+        "description": "Subnet for the ExpressRoute"
+      }
+    },
     "subnet0Prefix": {
       "type": "string",
-      "defaultValue": "192.168.0.0/24",
+      "defaultValue": "192.168.1.0/24",
       "metadata": {
         "description": "Mgmt subnet CIDR"
       }
     },
     "subnet1Prefix": {
       "type": "string",
-      "defaultValue": "192.168.1.0/24",
+      "defaultValue": "192.168.2.0/24",
       "metadata": {
         "description": "Untrust subnet CIDR"
       }
     },
     "subnet2Prefix": {
       "type": "string",
-      "defaultValue": "192.168.2.0/24",
+      "defaultValue": "192.168.3.0/24",
       "metadata": {
         "description": "Trust subnet CIDR"
       }
     },
+	"subnet3Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.4.0/24",
+      "metadata": {
+        "description": "DMZ subnet CIDR"
+      }
+    },
+	"subnet4Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.5.0/24",
+      "metadata": {
+        "description": "ExpressRoute subnet CIDR"
+      }
+    },
     "subnet0StartAddress": {
       "type": "string",
-      "defaultValue": "192.168.0.4",
+      "defaultValue": "192.168.1.4",
       "metadata": {
         "description": "Mgmt subnet start address"
       }
     },
     "subnet1StartAddress": {
       "type": "string",
-      "defaultValue": "192.168.1.4",
+      "defaultValue": "192.168.2.4",
       "metadata": {
         "description": "Untrust subnet start address"
       }
     },
-    "subnet2StartAddress": {
+	"subnet2StartAddress": {
       "type": "string",
-      "defaultValue": "192.168.2.4",
+      "defaultValue": "192.168.3.4",
       "metadata": {
-        "description": "Trust subnet start address"
+        "description": "trust subnet start address"
+      }
+    },
+	"subnet3StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.4.4",
+      "metadata": {
+        "description": "DMZ subnet start address"
+      }
+    },
+    "subnet4StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.5.4",
+      "metadata": {
+        "description": "ExpressRoute subnet start address"
       }
     }
     },
@@ -220,12 +262,16 @@
         "nicName": "[concat(parameters('vmName'), '-eth')]",
         "FWPrivateIPAddressUntrust": "[parameters('subnet1StartAddress')]",
         "FWPrivateIPAddressTrust": "[parameters('subnet2StartAddress')]",
+		"FWPrivateIPAddressDMZ": "[parameters('subnet3StartAddress')]",
+        "FWPrivateIPAddressExpressRoute": "[parameters('subnet4StartAddress')]",
         "publicIPAddressType": "Dynamic",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
         "nsgname-mgmt": "[concat(parameters('vmName'), '-DefaultNSG')]",
         "subnet0Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet0Name'))]",
         "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet1Name'))]",
         "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet2Name'))]",
+		"subnet3Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet3Name'))]",
+		"subnet4Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet4Name'))]",
 	"storageAccountSetupURL" : "[concat(parameters('baseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
 	"vmTemplateUrl": "[concat(parameters('baseUrl'), '/virtual-machine-', parameters('authenticationType'),'.json')]"
     },
@@ -437,7 +483,9 @@
          "storageAcountSetup1",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '0')]",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '1')]",
-         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '2')]"
+         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '2')]",
+		 "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '3')]",
+		 "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '4')]"
       ],
       "properties": {
         "mode": "Incremental",

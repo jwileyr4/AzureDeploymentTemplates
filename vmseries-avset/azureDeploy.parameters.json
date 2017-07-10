@@ -116,7 +116,7 @@
         },
 	"availabilitySetName": {
             "type": "string",
-	    "defaultValue": "VMSeriesFwAvSet",
+	    "defaultValue": "avsetPAN",
             "metadata": {
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
