@@ -132,14 +132,14 @@
 		"metadata": {
 			"artifactsBaseUrl": ""
 		},
-		"defaultValue": "https://raw.githubusercontent.com/PaloAltoNetworks/azure/master/vmseries-avset"
+		"defaultValue": "https://raw.githubusercontent.com/michelvankessel/azure/master/vmseries-avset"
 	},
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "Name of the virtual network that the consumer wants to use"
       },
-      "defaultValue": "panVnet"
+      "defaultValue": "vnPAN"
     },
     "virtualNetworkAddressPrefix": {
       "type": "string",
