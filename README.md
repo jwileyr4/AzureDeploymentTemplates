@@ -22,7 +22,7 @@ This is a repository for Azure Resoure Manager (ARM) templates to deploy VM-Seri
 "imageOffer" :    "vmseries1",
 "imageVersion":   "latest"
 ```
-- By default, if `"imageVersion"` is not specified then the latest PAN-OS version available in Azure Marketplace is used (equivalent to writing `"imageVersion": "latest"`). To use a specific PAN-OS version available in the Azure Marketplace, set it as `"imageVersion": "8.0.0"` or `"imageVersion": "7.1.1"`. For an example on setting the PAN-OS version see the following template: https://github.com/PaloAltoNetworks/azure/tree/master/vmseries-avset
+- By default, if `"imageVersion"` is not specified then the latest PAN-OS version available in Azure Marketplace is used (equivalent to writing `"imageVersion": "latest"`). To use a specific PAN-OS version available in the Azure Marketplace, set it as `"imageVersion": "8.0.0"` or `"imageVersion": "7.1.1"`. For an example on setting the PAN-OS version see the following template: https://github.com/michelvankessel/azure/tree/master/vmseries-avset
 
 - Before you use the custom ARM templates here, you must first deploy the related VM from the Azure Marketplace into the intended/destination Azure location. This enables programmatic access (i.e. template-based deployment) to deploy the VM from Azure Marketplace. You can then delete the Marketplace-based deployment if you don't need it.
 - For example, if you plan to use a custom ARM template to deploy a BYOL VM of VM-Series into Australia-East, then first deploy the BYOL VM from Marketplace into Australia. This is needed only the first time. You can then delete this VM and its related resources. Now your ARM templates, from GitHub or via CLI, will work.
