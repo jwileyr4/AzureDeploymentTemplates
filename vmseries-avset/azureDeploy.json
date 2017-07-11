@@ -8,37 +8,6 @@
                 "description": "region of resources"
             }
         },
-        "newStorageAccount": {
-            "type": "string",
-            "metadata": {
-                "description": "Globally unique lowercase name of your storage account"
-            }
-        },
-        "storageAccountType": {
-            "type": "string",
-	    "metadata": {
-		"description": "The type of the Storage Account created"
-	    },
-	    "defaultValue":"Standard_LRS"
-	},
-        "storageAccountNewOrExisting" : {
-            "type": "string",
-            "defaultValue" : "new",
-            "allowedValues" : [
-                "new",
-                "existing"
-            ],
-            "metadata": {
-                "Description": "Indicates whether the Storage Account is new or existing"
-            }
-        },
-        "existingStorageAccountRG": {
-            "type": "string",
-            "defaultValue" : "",
-            "metadata": {
-               "description": "Storage Resource Group of the Existing VM."
-            }
-        },
         "dnsNameForPublicIP": {
             "type": "string",
             "metadata": {
@@ -119,6 +88,14 @@
             "metadata": {
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
+        },
+		"availabilitySetPlatformFaultDomainCount": {
+            "type": "string",
+		"defaultValue": "2"
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "type": "string",
+		"defaultValue": "5"
         },
         "srcIPInboundNSG": {
             "type": "string",
@@ -255,9 +232,9 @@
     }
     },
     "variables": {
-        "apiVersion": "2015-06-15",
+        "apiVersion": "2016-04-30-preview",
         "imagePublisher": "paloaltonetworks",
-	"imageOffer" : "vmseries1",
+	    "imageOffer" : "vmseries1",
         "fwpublicIPName": "[concat(parameters('vmName'), '-fwMgmtPublicIP')]",
         "nicName": "[concat(parameters('vmName'), '-eth')]",
         "FWPrivateIPAddressUntrust": "[parameters('subnet1StartAddress')]",
@@ -272,7 +249,6 @@
         "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet2Name'))]",
 		"subnet3Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet3Name'))]",
 		"subnet4Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet4Name'))]",
-	"storageAccountSetupURL" : "[concat(parameters('baseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
 	"vmTemplateUrl": "[concat(parameters('baseUrl'), '/virtual-machine-', parameters('authenticationType'),'.json')]"
     },
     "resources": [
