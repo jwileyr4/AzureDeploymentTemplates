@@ -98,8 +98,8 @@
             "defaultValue": "byol",
             "allowedValues": [
                 "byol",
-		"bundle1",
-		"bundle2"
+				"bundle1",
+				"bundle2"
             ],
             "metadata": {
                 "description": "VM-Series model: BYOL or hourly pay-as-you-go (PAYG): Bundle 1 or Bundle 2"
@@ -141,7 +141,7 @@
       "metadata": {
         "description": "Name of the virtual network that the consumer wants to use"
       },
-      "defaultValue": "vnetPAN"
+      "defaultValue": "vnetpan"
     },
     "virtualNetworkAddressPrefix": {
       "type": "string",
@@ -185,6 +185,27 @@
         "description": "Subnet for the ExpressRoute"
       }
     },
+	"subnet5Name": {
+      "type": "string",
+      "defaultValue": "Future1",
+      "metadata": {
+        "description": "Subnet for the Future1"
+      }
+    },
+	"subnet6Name": {
+      "type": "string",
+      "defaultValue": "Future2",
+      "metadata": {
+        "description": "Subnet for the Future2"
+      }
+    },
+	"subnet7Name": {
+      "type": "string",
+      "defaultValue": "Future3",
+      "metadata": {
+        "description": "Subnet for the Future3"
+      }
+    },
     "subnet0Prefix": {
       "type": "string",
       "defaultValue": "192.168.1.0/24",
@@ -220,6 +241,27 @@
         "description": "ExpressRoute subnet CIDR"
       }
     },
+	"subnet5Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.6.0/24",
+      "metadata": {
+        "description": "Future1 subnet CIDR"
+      }
+    },
+	"subnet6Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.7.0/24",
+      "metadata": {
+        "description": "Future2 subnet CIDR"
+		      }
+    },
+	"subnet7Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.8.0/24",
+      "metadata": {
+        "description": "Future3 subnet CIDR"
+      }
+    },
     "subnet0StartAddress": {
       "type": "string",
       "defaultValue": "192.168.1.4",
@@ -253,6 +295,27 @@
       "defaultValue": "192.168.5.4",
       "metadata": {
         "description": "ExpressRoute subnet start address"
+      }
+    },
+	"subnet5StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.6.4",
+      "metadata": {
+        "description": "Future1 subnet start address"
+      }
+    },
+	"subnet6StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.7.4",
+      "metadata": {
+        "description": "Future2 subnet start address"
+      }
+    },
+	"subnet7StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.8.4",
+      "metadata": {
+        "description": "Future3 subnet start address"
       }
     }	
     }
