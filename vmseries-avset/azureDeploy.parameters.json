@@ -8,6 +8,37 @@
                 "description": "region of resources"
             }
         },
+        "newStorageAccount": {
+            "type": "string",
+            "metadata": {
+                "description": "Globally unique lowercase name of your storage account"
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+	    "metadata": {
+		"description": "The type of the Storage Account created"
+	    },
+	    "defaultValue":"Standard_LRS"
+	},
+        "storageAccountNewOrExisting" : {
+            "type": "string",
+            "defaultValue" : "new",
+            "allowedValues" : [
+                "new",
+                "existing"
+            ],
+            "metadata": {
+                "Description": "Indicates whether the Storage Account is new or existing"
+            }
+        },
+        "existingStorageAccountRG": {
+            "type": "string",
+            "defaultValue" : "",
+            "metadata": {
+               "description": "Storage Resource Group of the Existing VM."
+            }
+        },
         "dnsNameForPublicIP": {
             "type": "string",
             "metadata": {
@@ -53,9 +84,10 @@
         },
         "imageVersion": {
             "type": "string",
-            "defaultValue": "8.0.0",
+            "defaultValue": "latest",
             "allowedValues": [
-				"8.0.0"		    
+                "7.1.1",
+		"8.0.0"		    
             ],
             "metadata": {
                 "description": "PAN-OS version."
@@ -66,8 +98,8 @@
             "defaultValue": "byol",
             "allowedValues": [
                 "byol",
-		        "bundle1",
-		        "bundle2"
+		"bundle1",
+		"bundle2"
             ],
             "metadata": {
                 "description": "VM-Series model: BYOL or hourly pay-as-you-go (PAYG): Bundle 1 or Bundle 2"
@@ -76,8 +108,13 @@
 	"vmSize": {
             "type": "string",
             "allowedValues": [
-		"Standard_DS4_v2",
-	  	"Standard_DS5_v2"  
+                "Standard_D3",
+		"Standard_D3_v2",
+                "Standard_D4", 
+		"Standard_D4_v2",
+		"Standard_D5",
+	  	"Standard_D5_v2"
+                "Standard_A4"		    
             ],
             "metadata": {
                 "description": "Azure VM size for VM-Series"
@@ -85,18 +122,10 @@
         },
 	"availabilitySetName": {
             "type": "string",
-	    "defaultValue": "avsetPAN",
+	    "defaultValue": "VMSeriesFwAvSet",
             "metadata": {
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
-        },
-		"availabilitySetPlatformFaultDomainCount": {
-            "type": "string",
-		"defaultValue": "2"
-        },
-        "availabilitySetPlatformUpdateDomainCount": {
-            "type": "string",
-		"defaultValue": "5"
         },
         "srcIPInboundNSG": {
             "type": "string",
@@ -109,14 +138,14 @@
 		"metadata": {
 			"artifactsBaseUrl": ""
 		},
-		"defaultValue": "https://raw.githubusercontent.com/michelvankessel/azure/master/vmseries-avset"
+		"defaultValue": "https://raw.githubusercontent.com/PaloAltoNetworks/azure/master/vmseries-avset"
 	},
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
         "description": "Name of the virtual network that the consumer wants to use"
       },
-      "defaultValue": "vnPAN"
+      "defaultValue": "panVnet"
     },
     "virtualNetworkAddressPrefix": {
       "type": "string",
