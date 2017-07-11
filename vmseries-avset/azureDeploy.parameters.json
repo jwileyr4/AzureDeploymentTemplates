@@ -53,9 +53,9 @@
         },
         "imageVersion": {
             "type": "string",
-            "defaultValue": "latest",
+            "defaultValue": "8.0.0",
             "allowedValues": [
-		"8.0.0"		    
+				"8.0.0"		    
             ],
             "metadata": {
                 "description": "PAN-OS version."
@@ -66,8 +66,8 @@
             "defaultValue": "byol",
             "allowedValues": [
                 "byol",
-		"bundle1",
-		"bundle2"
+		        "bundle1",
+		        "bundle2"
             ],
             "metadata": {
                 "description": "VM-Series model: BYOL or hourly pay-as-you-go (PAYG): Bundle 1 or Bundle 2"

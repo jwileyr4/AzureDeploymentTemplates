@@ -52,9 +52,9 @@
         },
         "imageVersion": {
             "type": "string",
-            "defaultValue": "latest",
+            "defaultValue": "8.0.0",
             "allowedValues": [
-		"8.0.0"		    
+		    "8.0.0"		    
             ],
             "metadata": {
                 "description": "PAN-OS version."
