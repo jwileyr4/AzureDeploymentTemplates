@@ -400,6 +400,16 @@
                 "properties": {
                     "addressPrefix": "[parameters('subnet2Prefix')]"
                 }
+            }, {
+                "name": "[parameters('subnet3Name')]",
+                "properties": {
+                    "addressPrefix": "[parameters('subnet3Prefix')]"
+                }
+            }, {
+                "name": "[parameters('subnet4Name')]",
+                "properties": {
+                    "addressPrefix": "[parameters('subnet4Prefix')]"
+                }
             }]
         }
     }, {

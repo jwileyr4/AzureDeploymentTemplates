@@ -206,14 +206,14 @@
         "description": "Trust subnet CIDR"
       }
     },
-	    "subnet3Prefix": {
+	"subnet3Prefix": {
       "type": "string",
       "defaultValue": "192.168.4.0/24",
       "metadata": {
         "description": "DMZ subnet CIDR"
       }
     },
-	    "subnet4Prefix": {
+	"subnet4Prefix": {
       "type": "string",
       "defaultValue": "192.168.5.0/24",
       "metadata": {
