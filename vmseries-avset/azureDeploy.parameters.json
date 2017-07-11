@@ -87,7 +87,7 @@
             "defaultValue": "latest",
             "allowedValues": [
                 "7.1.1",
-		"8.0.0"		    
+				"8.0.0"		    
             ],
             "metadata": {
                 "description": "PAN-OS version."
@@ -171,6 +171,20 @@
         "description": "Subnet for the Trust"
       }
     },
+	"subnet3Name": {
+      "type": "string",
+      "defaultValue": "DMZ",
+      "metadata": {
+        "description": "Subnet for the DMZ"
+      }
+    },
+	"subnet4Name": {
+      "type": "string",
+      "defaultValue": "ExpressRoute",
+      "metadata": {
+        "description": "Subnet for the ExpressRoute"
+      }
+    },
     "subnet0Prefix": {
       "type": "string",
       "defaultValue": "192.168.1.0/24",
@@ -190,6 +204,20 @@
       "defaultValue": "192.168.3.0/24",
       "metadata": {
         "description": "Trust subnet CIDR"
+      }
+    },
+	    "subnet3Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.4.0/24",
+      "metadata": {
+        "description": "DMZ subnet CIDR"
+      }
+    },
+	    "subnet4Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.5.0/24",
+      "metadata": {
+        "description": "ExpressRoute subnet CIDR"
       }
     },
     "subnet0StartAddress": {
@@ -212,6 +240,20 @@
       "metadata": {
         "description": "Trust subnet start address"
       }
-    }
+    },
+	"subnet3StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.4.4",
+      "metadata": {
+        "description": "DMZ subnet start address"
+      }
+    },
+	"subnet4StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.5.4",
+      "metadata": {
+        "description": "ExpressRoute subnet start address"
+      }
+    }	
     }
   }

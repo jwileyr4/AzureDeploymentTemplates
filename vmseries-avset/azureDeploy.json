@@ -86,7 +86,7 @@
             "defaultValue": "latest",
             "allowedValues": [
                 "7.1.1",
-		"8.0.0"		    
+				"8.0.0"		    
             ],
             "metadata": {
                 "description": "PAN-OS version."
@@ -171,6 +171,20 @@
         "description": "Subnet for the Trust"
       }
     },
+    "subnet3Name": {
+      "type": "string",
+      "defaultValue": "DMZ",
+      "metadata": {
+        "description": "Subnet for the DMZ"
+      }
+    },
+    "subnet4Name": {
+      "type": "string",
+      "defaultValue": "ExpressRoute",
+      "metadata": {
+        "description": "Subnet for the ExpressRoute"
+      }
+    },
     "subnet0Prefix": {
       "type": "string",
       "defaultValue": "192.168.1.0/24",
@@ -190,6 +204,20 @@
       "defaultValue": "192.168.3.0/24",
       "metadata": {
         "description": "Trust subnet CIDR"
+      }
+    },
+    "subnet3Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.4.0/24",
+      "metadata": {
+        "description": "Trust subnet DMZ"
+      }
+    },
+    "subnet4Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.5.0/24",
+      "metadata": {
+        "description": "Trust subnet ExpressRoute"
       }
     },
     "subnet0StartAddress": {
@@ -212,6 +240,20 @@
       "metadata": {
         "description": "Trust subnet start address"
       }
+    },
+    "subnet3StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.4.4",
+      "metadata": {
+        "description": "DMZ subnet start address"
+      }
+    },
+	"subnet4StartAddress": {
+      "type": "string",
+      "defaultValue": "192.168.5.4",
+      "metadata": {
+        "description": "ExpressRoute subnet start address"
+      }
     }
     },
     "variables": {
@@ -222,12 +264,16 @@
         "nicName": "[concat(parameters('vmName'), '-eth')]",
         "FWPrivateIPAddressUntrust": "[parameters('subnet1StartAddress')]",
         "FWPrivateIPAddressTrust": "[parameters('subnet2StartAddress')]",
+		"FWPrivateIPAddressDMZ": "[parameters('subnet3StartAddress')]",
+		"FWPrivateIPAddressExpressRoute": "[parameters('subnet4StartAddress')]",
         "publicIPAddressType": "Dynamic",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
         "nsgname-mgmt": "[concat(parameters('vmName'), '-DefaultNSG')]",
         "subnet0Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet0Name'))]",
         "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet1Name'))]",
         "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet2Name'))]",
+        "subnet3Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet3Name'))]",
+        "subnet4Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet4Name'))]",
 	"storageAccountSetupURL" : "[concat(parameters('baseUrl'),'/storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
 	"vmTemplateUrl": "[concat(parameters('baseUrl'), '/virtual-machine-', parameters('authenticationType'),'.json')]"
     },
@@ -430,6 +476,54 @@
                 }
             }]
         }
+    }, {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[concat(variables('nicName'), '3')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+            "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+        ],
+        "tags": {
+            "displayName": "[concat('NetworkInterfaces', '3')]"
+        },
+        "properties": {
+            "enableIPForwarding": true,
+            "ipConfigurations": [{
+                "name": "[concat('ipconfig', '3')]",
+                "properties": {
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "[variables('FWPrivateIPAddressDMZ')]",
+                    "subnet": {
+                        "id": "[variables(concat('subnet','3','Ref'))]"
+                    }
+                }
+            }]
+        }
+    }, {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[concat(variables('nicName'), '4')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+            "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+        ],
+        "tags": {
+            "displayName": "[concat('NetworkInterfaces', '4')]"
+        },
+        "properties": {
+            "enableIPForwarding": true,
+            "ipConfigurations": [{
+                "name": "[concat('ipconfig', '4')]",
+                "properties": {
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "[variables('FWPrivateIPAddressExpressRoute')]",
+                    "subnet": {
+                        "id": "[variables(concat('subnet','4','Ref'))]"
+                    }
+                }
+            }]
+        }
     },
     {
       "name": "PAN-VM",
@@ -439,7 +533,9 @@
          "storageAcountSetup1",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '0')]",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '1')]",
-         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '2')]"
+         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '2')]",
+		 "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '3')]",
+		 "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '4')]"
       ],
       "properties": {
         "mode": "Incremental",
