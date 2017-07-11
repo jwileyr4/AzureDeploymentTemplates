@@ -89,7 +89,7 @@
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
         },
-		"availabilitySetPlatformFaultDomainCount": {
+	"availabilitySetPlatformFaultDomainCount": {
             "type": "string",
 		"defaultValue": "2"
         },
@@ -253,39 +253,18 @@
     },
     "resources": [
     {
-	"name": "storageAcountSetup1",
-	"type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-	"properties" : {
-		"mode": "Incremental",
-		"templateLink" : {
-		"uri" : "[variables('storageAccountSetupURL')]",
-		"contentVersion": "1.0.0.0"
-	},
-	"parameters" : {
-		"location": {
-			"value": "[parameters('location')]"
-		},
-		"storageAccountType": {
-			"value": "[parameters('storageAccountType')]"
-		},
-		"newStorageAccount" : {
-			"value": "[parameters('newStorageAccount')]"
-		},
-		"storageAccountExistingRG": {
-			"value": "[parameters('existingStorageAccountRG')]"
-		}
-	  }
-        }
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-04-30-preview",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('availabilitySetName')]",
       "location": "[resourceGroup().location]"
+	  "properties": {
+          "platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
+          "platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]",
+          "managed": true
+       }
     }, 
     {
-        "apiVersion": "[variables('apiVersion')]",
+        "apiVersion": "2016-09-01",
         "type": "Microsoft.Network/publicIPAddresses",
         "name": "[variables('fwpublicIPName')]",
         "location": "[parameters('location')]",
@@ -296,7 +275,7 @@
             }
         }
     }, {
-        "apiVersion": "[variables('apiVersion')]",
+        "apiVersion": "2016-09-01",
         "type": "Microsoft.Network/networkSecurityGroups",
         "name": "[concat(parameters('vmName'), '-DefaultNSG')]",
         "location": "[parameters('location')]",
@@ -343,7 +322,7 @@
             }]
         }
     }, {
-        "apiVersion": "[variables('apiVersion')]",
+        "apiVersion": "2016-09-01",
         "type": "Microsoft.Network/virtualNetworks",
         "name": "[parameters('virtualNetworkName')]",
         "location": "[parameters('location')]",
@@ -377,7 +356,7 @@
             }]
         }
     }, {
-        "apiVersion": "[variables('apiVersion')]",
+        "apiVersion": "2016-09-01",
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('nicName'), '0')]",
         "location": "[parameters('location')]",
@@ -403,7 +382,7 @@
             }]
         }
     }, {
-        "apiVersion": "[variables('apiVersion')]",
+        "apiVersion": "2016-09-01",
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('nicName'), '1')]",
         "location": "[parameters('location')]",
@@ -427,7 +406,7 @@
             }]
         }
     }, {
-        "apiVersion": "[variables('apiVersion')]",
+        "apiVersion": "2016-09-01",
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('nicName'), '2')]",
         "location": "[parameters('location')]",
@@ -450,13 +429,60 @@
                 }
             }]
         }
+    }, {
+        "apiVersion": "2016-09-01",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[concat(variables('nicName'), '3')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+            "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+        ],
+        "tags": {
+            "displayName": "[concat('NetworkInterfaces', '3')]"
+        },
+        "properties": {
+            "enableIPForwarding": true,
+            "ipConfigurations": [{
+                "name": "[concat('ipconfig', '3')]",
+                "properties": {
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "[variables('FWPrivateIPAddressTrust')]",
+                    "subnet": {
+                        "id": "[variables(concat('subnet','3','Ref'))]"
+                    }
+                }
+            }]
+        }
+	}, {
+        "apiVersion": "2016-09-01",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[concat(variables('nicName'), '4')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+            "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+        ],
+        "tags": {
+            "displayName": "[concat('NetworkInterfaces', '4')]"
+        },
+        "properties": {
+            "enableIPForwarding": true,
+            "ipConfigurations": [{
+                "name": "[concat('ipconfig', '4')]",
+                "properties": {
+                    "privateIPAllocationMethod": "Static",
+                    "privateIPAddress": "[variables('FWPrivateIPAddressTrust')]",
+                    "subnet": {
+                        "id": "[variables(concat('subnet','4','Ref'))]"
+                    }
+                }
+            }]
+        }
     },
-    {
+	{
       "name": "PAN-VM",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2016-04-30-preview",
       "dependsOn": [
-         "storageAcountSetup1",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '0')]",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '1')]",
          "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '2')]",
@@ -482,7 +508,7 @@
           "imageOffer": {
             "value": "[variables('imageOffer')]"
           },
-  	 "imageVersion": {
+  	      "imageVersion": {
             "value": "[parameters('imageVersion')]"
           },
           "imagePublisher": {
@@ -500,14 +526,17 @@
           "adminPassword": {
             "value": "[parameters('adminPassword')]"
           },
-          "newStorageAccount": {
-            "value": "[parameters('newStorageAccount')]"
-          },
           "sshKey": {
             "value": "[parameters('sshKey')]"
           },
-        "availabilitySetName": {
-          "value": "[parameters('availabilitySetName')]"
+		  "availabilitySetName": {
+            "value": "[parameters('availabilitySetName')]"
+		  },
+		  "availabilitySetPlatformFaultDomainCount": {
+            "value": "[parameters('availabilitySetPlatformFaultDomainCount')]"
+        }
+        "availabilitySetPlatformUpdateDomainCount": {
+          "value": "[parameters('availabilitySetPlatformUpdateDomainCount')]"
         }
         }
       }
