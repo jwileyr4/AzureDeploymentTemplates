@@ -141,7 +141,7 @@
       "metadata": {
         "description": "Name of the virtual network that the consumer wants to use"
       },
-      "defaultValue": "panVnet"
+      "defaultValue": "vnetPAN"
     },
     "virtualNetworkAddressPrefix": {
       "type": "string",
