@@ -320,7 +320,7 @@
 		}
 	},
 	"variables": {
-		"apiVersion": "2016-08-01",
+		"apiVersion": "2016-04-30-preview",
 		"imagePublisher": "paloaltonetworks",
 		"imageOffer": "vmseries1",
 		"fwpublicIPName": "[concat(parameters('vmName'), '-fwMgmtPublicIP')]",
@@ -697,7 +697,7 @@
 	{
 		"name": "PAN-VM",
 		"type": "Microsoft.Resources/deployments",
-		"apiVersion": "2015-01-01",
+		"apiVersion": "2016-04-30-preview",
 		"dependsOn": ["storageAcountSetup1",
 		"[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '0')]",
 		"[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '1')]",
