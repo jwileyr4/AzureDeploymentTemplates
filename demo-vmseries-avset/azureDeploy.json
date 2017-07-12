@@ -10,6 +10,7 @@
 		},
 		"newStorageAccount": {
 			"type": "string",
+			"defaultValue": "West Europe",
 			"metadata": {
 				"description": "Globally unique lowercase name of your storage account"
 			}
