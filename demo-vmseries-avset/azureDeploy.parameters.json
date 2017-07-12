@@ -125,7 +125,7 @@
 			"metadata": {
 				"artifactsBaseUrl": ""
 			},
-			"defaultValue": "https://raw.githubusercontent.com/michelvankessel/azure/master/vmseries-avset"
+			"defaultValue": "https://raw.githubusercontent.com/michelvankessel/azure/master/demo-vmseries-avset"
 		},
 		"virtualNetworkName": {
 			"type": "string",
