@@ -122,6 +122,14 @@
                 "description": "Azure Availability Set for VM-Series firewalls"
             }
         },
+        "availabilitySetPlatformFaultDomainCount": {
+            "type": "string",
+			"defaultValue": "2"
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "type": "string",
+			"defaultValue": "5"
+        },
         "srcIPInboundNSG": {
             "type": "string",
             "metadata": {
@@ -374,7 +382,7 @@
         }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2016-04-30-preview",
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('availabilitySetName')]",
       "location": "[resourceGroup().location]"
