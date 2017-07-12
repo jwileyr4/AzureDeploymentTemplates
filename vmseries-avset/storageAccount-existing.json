@@ -22,7 +22,7 @@
       "metadata": {
         "Description": "The type of the Storage Account created"
       },
-      "defaultValue": "Standard_LRS"
+      "defaultValue": "Premium_LRS"
     },
     "storageAccountExistingRG" : {
       "type" : "string",

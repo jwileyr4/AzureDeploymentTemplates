@@ -120,7 +120,7 @@
             "type": "string",
 	    "defaultValue": "VMSeriesFwAvSet",
             "metadata": {
-                "description": "Azure Availability Set for VM-Series firewalls"
+                "description": "Azure Availability Set for VM firewalls"
             }
         },
         "srcIPInboundNSG": {

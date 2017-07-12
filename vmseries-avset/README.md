@@ -53,4 +53,4 @@ If you are creating customized ARM templates you can use the following informati
 - Publisher name: paloaltonetworks
 - Offer: vmseries1
 - SKU: byol or bundle1 or bundle2
-- Version: 8.0.0, 7.1.1 or latest (recommended)
+- Version: 8.0.0, 7.1.1 or latest(recommended)
