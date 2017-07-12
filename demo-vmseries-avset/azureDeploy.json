@@ -109,10 +109,18 @@
 		},
 		"availabilitySetName": {
 			"type": "string",
-			"defaultValue": "VMSeriesFwAvSet",
+			"defaultValue": "avsetfwpan",
 			"metadata": {
 				"description": "Azure Availability Set for VM firewalls"
 			}
+		},
+		"availabilitySetPlatformFaultDomainCount": {
+			"type": "string",
+			"defaultValue": "2"
+		},
+		"availabilitySetPlatformUpdateDomainCount": {
+			"type": "string",
+			"defaultValue": "5"
 		},
 		"srcIPInboundNSG": {
 			"type": "string",
