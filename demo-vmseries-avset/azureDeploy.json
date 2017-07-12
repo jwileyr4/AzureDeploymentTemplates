@@ -378,9 +378,10 @@
 		"name": "[parameters('availabilitySetName')]",
 		"location": "[resourceGroup().location]",
 		"properties": {
-                "platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
-                "platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]",
-                "managed": true
+			"platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
+			"platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]",
+			"managed": true
+		}
 	},
 	{
 		"apiVersion": "[variables('apiVersion')]",
