@@ -697,7 +697,7 @@
 	{
 		"name": "PAN-VM",
 		"type": "Microsoft.Resources/deployments",
-		"apiVersion": "2016-04-30-preview",
+		"apiVersion": "2017-06-01",
 		"dependsOn": ["storageAcountSetup1",
 		"[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '0')]",
 		"[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), '1')]",
