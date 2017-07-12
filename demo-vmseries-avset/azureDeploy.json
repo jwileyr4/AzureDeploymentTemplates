@@ -373,10 +373,14 @@
 		}
 	},
 	{
-		"apiVersion": "2015-05-01-preview",
+		"apiVersion": "2016-04-30-preview",
 		"type": "Microsoft.Compute/availabilitySets",
 		"name": "[parameters('availabilitySetName')]",
-		"location": "[resourceGroup().location]"
+		"location": "[resourceGroup().location]",
+		"properties": {
+                "platformFaultDomainCount": "[parameters('availabilitySetPlatformFaultDomainCount')]",
+                "platformUpdateDomainCount": "[parameters('availabilitySetPlatformUpdateDomainCount')]",
+                "managed": true
 	},
 	{
 		"apiVersion": "[variables('apiVersion')]",
