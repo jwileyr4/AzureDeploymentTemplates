@@ -320,7 +320,7 @@
 		}
 	},
 	"variables": {
-		"apiVersion": "2016-04-30-preview",
+		"apiVersion": "2017-06-01",
 		"imagePublisher": "paloaltonetworks",
 		"imageOffer": "vmseries1",
 		"fwpublicIPName": "[concat(parameters('vmName'), '-fwMgmtPublicIP')]",
