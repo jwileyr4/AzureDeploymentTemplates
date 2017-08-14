@@ -3,7 +3,7 @@
 -------------------------------------------------------------
 TODO
 - 20170623 - made a fork to change the following things
-1. add VIF more NICS and attach to VM-series - DONE! 11-07-2017
+1. add vife more NICS and attach to VM-series - DONE! 11-07-2017
 2. make choice at least vm choice that support +4 nics (e.g. DS4_v2) - DONE! 11-07-2017
 3. Change to Managed Disks - DONE! 13-07-2017
 4. Change Availability set with managed disk support - DONE! 13-07-2017
