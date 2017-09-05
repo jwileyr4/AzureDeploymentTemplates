@@ -12,7 +12,7 @@ TODO
 1. Take out storageaccount config
 2. change SSH public key json to include managed disk and correct API version
 
-
+Bye
 ------------------------------------------------------------
 
 This ARM template deploys a VM-Series next generation firewall VM in an availability set of a Azure resource group. It lets you select your:
